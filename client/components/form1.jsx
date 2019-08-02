@@ -1,6 +1,7 @@
 /**collects name and email and password for account creaation */
 
 import React, { Component } from "react";
+import Form2 from './form2.jsx'
 
 export default class form1 extends Component {
   constructor(props) {
@@ -8,10 +9,12 @@ export default class form1 extends Component {
     this.state = {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      completed: false
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
@@ -27,14 +30,23 @@ export default class form1 extends Component {
     }
   }
 
+  handleClick() {
+    if (this.state.name && this.state.email && this.state.password) {
+      this.setState({completed: true});
+    }
+    console.log('after submit', this.state.completed)
+  }
+
   render() {
+    if (!this.state.completed){
     return <div>
       <form onChange={this.handleChange}>
         Name: <input type="text" name="Name"/><br/>
         Email: <input type="text" name="Email"/><br/>
         Password: <input type="text" name="Password"/><br/>
-        <input type="submit" value="Submit"/>
       </form>
+      <input onClick={this.handleClick} type="submit" value="Submit"/>
     </div>;
+  } else {return <Form2/>}
   }
 }

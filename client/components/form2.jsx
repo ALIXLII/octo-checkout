@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-const form2 = props => {
+const Form2 = props => {
   return (<div>
-    <h1>?</h1>
+    <h1>completed</h1>
   </div>);
 };
 
-export default form2;
+export default Form2;

@@ -12,6 +12,13 @@ export default class form1 extends Component {
     };
   }
   render() {
-    return <div>hello you must create an account to continue</div>;
+    return <div>
+      <form action="/form2.jsx">
+        Name: <input type="text" name="Name" value="Alex"/><br/>
+        Email: <input type="text" name="Email" value="alex@email.com"/><br/>
+        Password: <input type="text" name="Password" value=""/><br/>
+        <input type="submit" value="Submit"/>
+      </form>
+    </div>;
   }
 }

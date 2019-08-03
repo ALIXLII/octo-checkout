@@ -4,6 +4,7 @@ const path = require("path");
 const app = express();
 const router = require("./routes");
 
+const db = require('../database/index.js');
 const port = 1337;
 
 app.use(bodyParser.urlencoded({ extended: true }));

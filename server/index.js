@@ -7,10 +7,11 @@ const router = require("./routes");
 const db = require('../database/index.js');
 const port = 1337;
 
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(express.static(path.resolve(__dirname + "/dist")));
+app.use(express.static(path.resolve(__dirname + "/../dist/")));
 
 app.use("/api", router);
 

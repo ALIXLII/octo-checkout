@@ -3,32 +3,46 @@ const schema = require("../database/index.js")
 
 module.exports = {
   post: (req, res) => {
-    console.log("this is a post");
-    const octoCheckout = new schema({
-      form1: {
-        name: "alex",
-        email: "@mail",
-        password: "****"
-      }
-    }).save(err => {
-      if (err) {
-        console.log(err);
-        res.send("error saving checkout!")
-      }
-      res.send("saved in db");
-    })
+    console.log("this is a post", req.body.form);
+    var form;
+    if (req.body.form === "form1") {
+      form = new schema({
+        form1: {
+          name: req.body.name,
+          email: req.body.email,
+          password: req.body.password
+        }
+      })
+    };
+    if (form) {
+      form.save(err => {
+        if (err) {console.log(err)}
+        res.send('saved')
+      })
+    }
+    // const octoCheckout = new schema({
+    //   form1: {
+    //     name: "alex"
+    //   }
+    // }).save(err => {
+    //   if (err) {
+    //     console.log(err);
+    //     res.send("error saving checkout!")
+    //   }
+    //   res.send("saved in db");
+    // })
   },
   get: (req, res) => {
     console.log("this is a get");
-    res.send("get")
+    res.send("get request")
   },
   patch: (req, res) => {
     console.log("this is a patch");
     schema.findOneAndUpdate(
       "form1",
       {
-        "form1.name": "bob",
-        "form1.email": "sdkhfksdh"
+        "form1.name": "alex",
+        "form1.email": "email"
       },
       {new: true},
       (err, doc) => {

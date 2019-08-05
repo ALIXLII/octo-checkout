@@ -48,7 +48,7 @@ class Form2 extends React.Component {
   }
 
   render() {
-    if (!this.state.form2Completed){
+    if (!this.state.line1 || !this.state.line2 || !this.state.city || !this.state.state || !this.state.zipcode || !this.state.phoneNumber) {
     return <div>
       <form onChange={this.handleChange}>
         Line1: <input type="text" name="Line1"/><br/>

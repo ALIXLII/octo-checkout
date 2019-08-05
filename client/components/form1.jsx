@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import Form2 from './form2.jsx';
+import {postData} from '../functions';
 
 export default class form1 extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ export default class form1 extends Component {
       name: "",
       email: "",
       password: "",
-      form1Completed: false
+      form: "form1"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,13 +32,13 @@ export default class form1 extends Component {
   }
 
   handleClick() {
-    if (this.state.name && this.state.email && this.state.password) {
-      this.setState({form1Completed: true});
-    }
+    this.setState({form: "form1"})
+    console.log(this.state)
+    postData("/api/db", this.state)
   }
 
   render() {
-    if (!this.state.form1Completed){
+    if (!this.state.name || !this.state.email || !this.state.password){
     return <div>
       <form onChange={this.handleChange}>
         Name: <input type="text" name="Name"/><br/>
@@ -46,6 +47,6 @@ export default class form1 extends Component {
       </form>
       <input onClick={this.handleClick} type="submit" value="Submit"/>
     </div>;
-    } else {return <Form2/>}
+  } else {return <Form2/>}
   }
 }

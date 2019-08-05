@@ -39,7 +39,7 @@ export default class form3 extends Component {
   }
 
   render() {
-    if (!this.state.form3Completed){
+    if (!this.state.credit && !this.state.exp && !this.state.cvv && !this .state.billing) {
     return <div>
       <form onChange={this.handleChange}>
         Credit Card #: <input type="text" name="credit"/><br/>

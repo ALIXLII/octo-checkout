@@ -5,6 +5,6 @@ router
   .route("/db")
   .get(controller.get)
   .post(controller.post)
-  .put(controller.put);
+  .patch(controller.patch);
 
 module.exports = router;

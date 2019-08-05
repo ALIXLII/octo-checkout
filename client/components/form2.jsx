@@ -8,7 +8,7 @@ class Form2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: props.name,
+      email: props.email,
       line1: "",
       line2: "",
       city: "",
@@ -45,7 +45,6 @@ class Form2 extends React.Component {
 
   handleClick() {
     this.setState({form: "form2"})
-    console.log(this.state)
     if (this.state.line1 && this.state.line2 && this.state.city && this.state.state && this.state.zipcode && this.state.phoneNumber) {
       patchData("/api/db", this.state)
     }

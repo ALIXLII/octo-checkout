@@ -42,10 +42,18 @@ module.exports = {
   patch: (req, res) => {
     console.log("this is a patch", req.body);
     schema.findOneAndUpdate(
-      `req.body.name`,
+      {"form1.email":req.body.email},
       {
-        "form2.line1": "sdfsd",
-        "form2.line2": "twsdfsdfo"
+        "form2.line1": req.body.line1,
+        "form2.line2": req.body.line2,
+        "form2.city": req.body.city,
+        "form2.state": req.body.state,
+        "form2.zipcode": req.body.zipcode,
+        "form2.phoneNumber": req.body.phoneNumber,
+        "form3.credit": req.body.credit,
+        "form3.exp": req.body.exp,
+        "form3.cvv": req.body.cvv,
+        "form3.billing": req.body.billing
       },
       {new: true},
       (err, doc) => {

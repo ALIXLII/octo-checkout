@@ -48,6 +48,6 @@ export default class form1 extends Component {
       </form>
       <input onClick={this.handleClick} type="submit" value="Submit"/>
     </div>;
-  } else {return <Form2 name={this.state.name}/>}
+  } else {return <Form2 email={this.state.email}/>}
   }
 }

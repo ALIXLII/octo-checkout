@@ -63,7 +63,7 @@ class Form2 extends React.Component {
       </form>
       <input onClick={this.handleClick} type="submit" value="Submit"/>
     </div>;
-    } else {return <Form3/>}
+  } else {return <Form3 email={this.state.email}/>}
   }
 };
 

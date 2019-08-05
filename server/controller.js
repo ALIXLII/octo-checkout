@@ -41,20 +41,28 @@ module.exports = {
   },
   patch: (req, res) => {
     console.log("this is a patch", req.body);
-    schema.findOneAndUpdate(
-      {"form1.email":req.body.email},
-      {
+    var form;
+    if (req.body.form === "form2") {
+      form = {
         "form2.line1": req.body.line1,
         "form2.line2": req.body.line2,
         "form2.city": req.body.city,
         "form2.state": req.body.state,
         "form2.zipcode": req.body.zipcode,
-        "form2.phoneNumber": req.body.phoneNumber,
+        "form2.phoneNumber": req.body.phoneNumber
+      }
+    }
+    if (req.body.form === "form3") {
+      form = {
         "form3.credit": req.body.credit,
         "form3.exp": req.body.exp,
         "form3.cvv": req.body.cvv,
         "form3.billing": req.body.billing
-      },
+      }
+    }
+    schema.findOneAndUpdate(
+      {"form1.email":req.body.email},
+      form,
       {new: true},
       (err, doc) => {
         if (err) {

@@ -1,16 +1,18 @@
 //F3 collects credit card #, expiry date, CVV, and billing zip code.
 
 import React, { Component } from "react";
+import {patchData} from '../functions';
 
 export default class form3 extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      email: props.email,
       credit: "",
       exp: "",
       cvv: "",
       billing: "",
-      form3Completed: false
+      form: "form3"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,13 +35,14 @@ export default class form3 extends Component {
   }
 
   handleClick() {
+    this.setState({form: "form3"})
     if (this.state.credit && this.state.exp && this.state.cvv && this .state.billing) {
-      this.setState({form3Completed: true});
+      patchData("/api/db", this.state)
     }
   }
 
   render() {
-    if (!this.state.credit && !this.state.exp && !this.state.cvv && !this .state.billing) {
+    if (!this.state.credit || !this.state.exp || !this.state.cvv || !this .state.billing) {
     return <div>
       <form onChange={this.handleChange}>
         Credit Card #: <input type="text" name="credit"/><br/>

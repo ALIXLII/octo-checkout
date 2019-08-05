@@ -2,18 +2,20 @@
 
 import React from 'react';
 import Form3 from './form3.jsx';
+import {patchData} from '../functions';
 
 class Form2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: props.name,
       line1: "",
       line2: "",
       city: "",
       state: "",
       zipcode: "",
       phoneNumber: "",
-      form2Completed: false
+      form: "form2"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -42,8 +44,10 @@ class Form2 extends React.Component {
   }
 
   handleClick() {
+    this.setState({form: "form2"})
+    console.log(this.state)
     if (this.state.line1 && this.state.line2 && this.state.city && this.state.state && this.state.zipcode && this.state.phoneNumber) {
-      this.setState({form2Completed: true});
+      patchData("/api/db", this.state)
     }
   }
 

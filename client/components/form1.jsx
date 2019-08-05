@@ -33,8 +33,9 @@ export default class form1 extends Component {
 
   handleClick() {
     this.setState({form: "form1"})
-    console.log(this.state)
-    postData("/api/db", this.state)
+    if (this.state.name && this.state.email && this.state.password) {
+      postData("/api/db", this.state)
+    }
   }
 
   render() {
@@ -47,6 +48,6 @@ export default class form1 extends Component {
       </form>
       <input onClick={this.handleClick} type="submit" value="Submit"/>
     </div>;
-  } else {return <Form2/>}
+  } else {return <Form2 name={this.state.name}/>}
   }
 }

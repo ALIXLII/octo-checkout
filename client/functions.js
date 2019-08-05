@@ -19,5 +19,6 @@ const patchData = function(url, data = {}) {
 };
 
 module.exports = {
-  postData
+  postData,
+  patchData
 };

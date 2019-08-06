@@ -11,7 +11,8 @@ export default class form1 extends Component {
       name: "",
       email: "",
       password: "",
-      form: "form1"
+      form: "form1",
+      complete: true
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,11 +36,12 @@ export default class form1 extends Component {
     this.setState({form: "form1"})
     if (this.state.name && this.state.email && this.state.password) {
       postData("/api/db", this.state)
+      .then(res => {console.log("promise", res.json())})
     }
   }
 
   render() {
-    if (!this.state.name || !this.state.email || !this.state.password){
+    if (this.state.complete && !this.state.name || !this.state.email || !this.state.password){
     return <div>
       <form onChange={this.handleChange}>
         Name: <input type="text" name="Name"/><br/>
@@ -48,6 +50,6 @@ export default class form1 extends Component {
       </form>
       <input onClick={this.handleClick} type="submit" value="Submit"/>
     </div>;
-  } else {return <Form2 email={this.state.email}/>}
+    } else {return <Form2 email={this.state.email}/>}
   }
 }

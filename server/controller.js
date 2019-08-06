@@ -3,41 +3,56 @@ const schema = require("../database/index.js")
 
 module.exports = {
   post: (req, res) => {
-    console.log("this is a post", req.body.form);
-    var form;
-    if (req.body.form === "form1") {
-      form = new schema({
-        form1: {
-          name: req.body.name,
-          email: req.body.email,
-          password: req.body.password
-        },
-        form2: {
-          line1: "",
-          line2: "",
-          city: "",
-          state: "",
-          zipcode: "",
-          phoneNumber:""
-        },
-        form3: {
-          credit: "",
-          exp: "",
-          cvv: "",
-          billing: ""
+    console.log("this is a post", req.body);
+    var boo = true;
+    schema.findOne({"form1.email":req.body.email}, (err,obj) => {
+      if (err) {console.log(err)};
+      if (!obj) {
+        var form;
+        if (req.body.form === "form1") {
+          form = new schema({
+            form1: {
+              name: req.body.name,
+              email: req.body.email,
+              password: req.body.password
+            },
+            form2: {
+              line1: "",
+              line2: "",
+              city: "",
+              state: "",
+              zipcode: "",
+              phoneNumber:""
+            },
+            form3: {
+              credit: "",
+              exp: "",
+              cvv: "",
+              billing: ""
+            }
+          })
+        };
+        if (form) {
+          form.save(err => {
+            if (err) {console.log(err)}
+            res.send('saved')
+          })
         }
-      })
-    };
-    if (form) {
-      form.save(err => {
-        if (err) {console.log(err)}
-        res.send('saved')
-      })
-    }
+      } else if (obj) {
+        console.log("found duplicate", obj);
+        res.send(obj)
+      }
+    })
   },
   get: (req, res) => {
-    console.log("this is a get");
-    res.send("get request")
+    console.log("this is a get", req.body);
+    // schema.findOne({"form1.email":req.body.email}, (err, obj) => {
+    //   if (err) {
+    //     console.log(err)
+    //   }
+    //   res.send(obj)
+    // })
+    // res.send("get request")
   },
   patch: (req, res) => {
     console.log("this is a patch", req.body);

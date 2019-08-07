@@ -12,7 +12,7 @@ export default class form1 extends Component {
       email: "",
       password: "",
       form: "form1",
-      complete: true
+      complete: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -36,12 +36,25 @@ export default class form1 extends Component {
     this.setState({form: "form1"})
     if (this.state.name && this.state.email && this.state.password) {
       postData("/api/db", this.state)
-      .then(res => {console.log("promise", res.json())})
+      .then(res => {
+        //return res.json();
+        return res.json()
+      })
+      .then(res => {
+        console.log(res);
+        if (res) {
+          this.setState({complete: true})
+        } else {
+          alert("This email already exists!")
+        }
+      })
+    } else {
+      alert("Incomplete!")
     }
   }
 
   render() {
-    if (this.state.complete && !this.state.name || !this.state.email || !this.state.password){
+    if (!this.state.complete){
     return <div>
       <form onChange={this.handleChange}>
         Name: <input type="text" name="Name"/><br/>

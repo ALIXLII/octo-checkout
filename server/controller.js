@@ -35,12 +35,12 @@ module.exports = {
         if (form) {
           form.save(err => {
             if (err) {console.log(err)}
-            res.send('saved')
+            res.send(true)
           })
         }
       } else if (obj) {
         console.log("found duplicate", obj);
-        res.send(obj)
+        res.send(false)
       }
     })
   },
